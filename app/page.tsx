@@ -1,9 +1,8 @@
-import Image from "next/image";
-import  Logo  from "@/components/ui/logo";
+import Header from "@/components/ui/header";
 export default function Home() {
   return (
     <div>
-      <Logo />
+      <Header />
     </div>
   );
 }
