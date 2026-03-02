@@ -4,8 +4,9 @@ export default function Features() {
   return (
     <section className="relative py-24 bg-white">
       <div className="absolute left-0 right-0 top-0 m-auto w-px p-px h-20 bg-gray-200 transform -translate-y-1/2 z-10" />
+      <div className="absolute left-0 right-0 bottom-0 m-auto w-px p-px h-20 bg-gray-200 transform translate-y-1/2 z-10" />
       <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-5 pointer-events-none" />
-      
+
       <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
 
         <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
@@ -19,6 +20,7 @@ export default function Features() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+
 
           <div className="group flex flex-col items-center text-center p-8 bg-white rounded-3xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] border border-gray-100 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_-10px_rgba(0,102,255,0.15)] cursor-default">
             <div className="w-16 h-16 rounded-2xl bg-blue-50 text-[#0066FF] flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110">
