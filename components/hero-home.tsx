@@ -43,7 +43,7 @@ export default function HeroHome() {
               Archive webpages, track changes, and monitor performance with Cronshot.
             </p>
             <div className="mt-4">
-              <button className="h-14 px-8 rounded-full bg-[#0066FF] hover:bg-blue-700 text-white text-base font-semibold font-semibold shadow-lg transition-transform hover:scale-105 cursor-pointer">
+              <button className="h-14 px-8 rounded-lg bg-[#0066FF] hover:bg-blue-700 text-white text-base font-semibold shadow-lg transition-transform hover:scale-105 cursor-pointer">
                 Get Started for Free
               </button>
 
