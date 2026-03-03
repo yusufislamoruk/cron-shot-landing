@@ -13,7 +13,7 @@ import {
     navigationMenuTriggerStyle,
 } from "./navigation-menu";
 
-export default function Header*() {
+export default function Header() {
     const [top, setTop] = useState<boolean>(true);
 
     const scrollHandler = () => {
