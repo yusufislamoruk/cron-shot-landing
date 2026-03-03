@@ -1,16 +1,34 @@
-"use client";
+import Link from "next/link";
+
 export default function Cta() {
-    return (
-        <section className="relative ">
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-                <div>
-                    <div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
-                </div>
+  return (
+    <section>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="py-12 md:py-20">
+          <div
+            className="bg-gradient-to-r from-blue-700 to-blue-500 rounded py-10 px-8 md:py-16 md:px-12 shadow-2xl"
+          >
+            <div className="flex flex-col lg:flex-row justify-between items-center">
+              <div className="mb-6 lg:mr-16 lg:mb-0 text-center lg:text-left">
+                <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">Ready to get started?</h3>
+                <p className="text-white text-lg opacity-90">
+                  We have a generous free tier available to get you started
+                  right away.
+                </p>
+              </div>
+
+              <div>
+                <Link
+                  className="px-6 py-4 rounded-md font-semibold text-blue-600 bg-gradient-to-r from-blue-100 to-white hover:px-7 hover:py-5 duration-200"
+                  href="/sign-up"
+                >
+                  Get Started for Free
+                </Link>
+              </div>
             </div>
-        </section>
-    )
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }
