@@ -37,7 +37,7 @@ export default function SubscribeForm() {
                     <label className="block text-sm sr-only" htmlFor="newsletter">
                         Email
                     </label>
-                    <div className="relative flex items-center max-w-xs ">
+                    <div className="relative flex items-center w-full">
                         <input
                             className="w-full text-gray-800 px-3 py-3 pr-12 text-sm border border-gray-300 rounded-md bg-white outline-none focus:border-gray-600"
                             id="newsletter"

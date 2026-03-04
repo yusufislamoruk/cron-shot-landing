@@ -38,7 +38,7 @@ export default function FeaturesHome() {
 
           {/* Top image */}
           <div className="pb-12 md:pb-16">
-            <Image src={TopImage} width={1104} alt="Features top" />
+            <Image src={TopImage} width={1104} alt="Features top" className="w-full h-auto"/>
           </div>
         </div>
       </div>

@@ -3,13 +3,14 @@ export default function HeroHome() {
     <section className="relative">
       {/* Illustration behind hero content */}
       <div
-        className="absolute left-1/2 transform -translate-x-1/2 bottom-0 pointer-events-none -z-1"
+        className="absolute left-1/2 transform -translate-x-1/2 bottom-0 pointer-events-none -z-1 overflow-hidden w-full"
         aria-hidden="true"
       >
         <svg
-          width="1360"
+          width="100%"
           height="578"
           viewBox="0 0 1360 578"
+          preserveAspectRatio="xMidYMid slice"
           xmlns="http://www.w3.org/2000/svg"
         >
           <defs>
@@ -32,9 +33,9 @@ export default function HeroHome() {
         </svg>
       </div>
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 z-10">
-        <div className="md:pt-30 md:pb-20">
+        <div className="pt-24 md:pt-30 md:pb-20">
           <div className="text-center pb-12 md:pb-16 flex flex-col items-center">
-            <h1 className="text-5xl md:text-[5.5rem] font-black leading-tight tracking-tight mb-4 text-[#1C1C1E]">
+            <h1 className="text-4xl sm:text-5xl md:text-[5.5rem] font-black leading-tight tracking-tight mb-4 text-[#1C1C1E]">
               Automated webpage{" "}
               <br className="hidden md:block " />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-teal-400">screenshots</span>

@@ -130,7 +130,7 @@ export default function UseCases() {
                         </ul>
                     </div>
 
-                    <div className="relative flex flex-col items-start p-10 pt-15 bg-white rounded shadow-xl">
+                    <div className="relative flex flex-col items-start p-5 pt-8 md:p-10 md:pt-15 bg-white rounded shadow-xl">
                         {selectedUseCase.image}
                         <h4 className="text-xl font-bold leading-snug tracking-tight mb-1 text-center">
                             {selectedUseCase.title}
