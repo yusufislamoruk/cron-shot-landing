@@ -1,5 +1,6 @@
 
 import Logo from "./logo";
+import SubscribeForm from "../subscribe";
 
 export default function Footer() {
   return (
@@ -129,7 +130,7 @@ export default function Footer() {
             <p className="text-sm text-gray-600 mb-4">
               Get the latest news and articles to your inbox every month.
             </p>
-            
+            <SubscribeForm />
           </div>
         </div>
 
