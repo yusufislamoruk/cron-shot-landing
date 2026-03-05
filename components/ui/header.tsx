@@ -25,10 +25,10 @@ export default function Header() {
         window.addEventListener("scroll", scrollHandler);
         return () => window.removeEventListener("scroll", scrollHandler);
     }, [top]);
-    
+
     return (
         <header className={`fixed top-0 w-full z-50 flex items-center justify-between px-4 sm:px-12 lg:px-12 py-4 transition-all duration-100 ${!top ? "bg-white/80 backdrop-blur-md border-b border-gray-200/50 shadow-sm" : "bg-transparent border-b-0"}`}>
-            <div className="flex-shrink-0 pl-4">
+            <div className="flex-shrink-0">
                 <Logo />
             </div>
             <div className="hidden md:flex">
