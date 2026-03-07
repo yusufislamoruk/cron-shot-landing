@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Logo from "./logo";
 import { Button } from "./button";
+import MobileMenu from "./mobilemenu";
 import {
     NavigationMenu,
     NavigationMenuContent,
@@ -84,13 +85,17 @@ export default function Header() {
                 </NavigationMenu>
             </div>
 
-            <div className="flex items-center gap-6 text-gray-600 font-normal hover:text-gray-900 bg-transparent cursor-pointer text-xl pr-4">
-                Sign in
+            <div className="hidden md:flex items-center gap-6 text-gray-600 font-normal hover:text-gray-900 bg-transparent cursor-pointer text-xl pr-4">
+                <Link href="/login">
+                    Sign in
+                </Link>
                 <Button className="bg-[#1C1C1E] text-white text-xl hover:bg-[#2C2C2E] rounded-md px-6 shadow-sm cursor-pointer text-base pb-3">
-                    Sign up &rarr;
+                    <Link href="/sign-up">
+                        Sign up &rarr;
+                    </Link>
                 </Button>
             </div>
-
+            <MobileMenu />
         </header>
     )
 }
