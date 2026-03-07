@@ -1,8 +1,11 @@
-"use client";
-
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+
+export const metadata = {
+    title: "Brand Management",
+    description: "Protect your brand's reputation",
+};
 
 const sections = [
     {

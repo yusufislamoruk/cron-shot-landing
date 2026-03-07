@@ -1,8 +1,11 @@
-"use client";
-
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+
+export const metadata = {
+    title: "Competition Tracking",
+    description: "Keep an eye on your competitors",
+};
 
 const sections = [
     {

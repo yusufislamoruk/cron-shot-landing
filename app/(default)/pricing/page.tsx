@@ -1,6 +1,6 @@
 export const metadata = {
-  title: "Pricing",
-  description: "Pricing tables for Cronshot.",
+    title: "Pricing",
+    description: "Pricing tables for Cronshot.",
 };
 
 import Cta from "@/components/cta";

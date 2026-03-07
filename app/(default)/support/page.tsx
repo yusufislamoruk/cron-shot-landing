@@ -1,12 +1,12 @@
 import ContactForm from "@/components/contact-form";
 
 export const metadata = {
-  title: "Support",
-  description: "Have a question about CronShot? Contact us directly",
+    title: "Support",
+    description: "Have a question about CronShot? Contact us directly",
 };
 
 export default function Support() {
-  return (
+    return (
     <>
       {/* Contact section */}
       <section>

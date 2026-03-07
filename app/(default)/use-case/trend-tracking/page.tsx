@@ -1,8 +1,11 @@
-"use client";
-
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+
+export const metadata = {
+    title: "Trend Tracking",
+    description: "Keep track of trends and stay ahead of the competition",
+};
 
 const sections = [
     {

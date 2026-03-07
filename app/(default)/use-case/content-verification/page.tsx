@@ -1,9 +1,11 @@
-"use client";
-
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
+export const metadata = {
+    title: "Content Verification",
+    description: "Verified content, always",
+};
 const sections = [
     {
         value: "uncertainty",
