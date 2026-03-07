@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Check } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 
 const plans = [
     {
@@ -17,7 +18,7 @@ const plans = [
             "Email support",
         ],
         cta: "Try for free",
-        href: "https://app.cronshot.io/sign-up",
+        href: "/sign-up",
         popular: false,
         enterprise: false,
     },
@@ -32,7 +33,7 @@ const plans = [
             "Email support",
         ],
         cta: "Get Started for Free",
-        href: "https://app.cronshot.io/sign-up",
+        href: "/sign-up",
         popular: true,
         enterprise: false,
     },
@@ -47,7 +48,7 @@ const plans = [
             "Priority email support",
         ],
         cta: "Get Started for Free",
-        href: "https://app.cronshot.io/sign-up",
+        href: "/sign-up",
         popular: false,
         enterprise: false,
     },
@@ -78,17 +79,27 @@ export default function PricingTables() {
                 <div className="pt-32 pb-12 md:pt-40 md:pb-20">
 
                     {/* Section header */}
-                    <div className="max-w-4xl mx-auto text-center pb-12">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, ease: "easeOut" }}
+                        className="max-w-4xl mx-auto text-center pb-12"
+                    >
                         <h1 className="text-4xl md:text-[55px] font-bold tracking-tight mb-4 ">
                             Start for free. Pay as you grow. <span>Switch at any time</span>
                         </h1>
                         <p className="text-2xl text-gray-500 max-w-3xl mx-auto">
                             No matter how many team members you have - our pricing is simple, transparent and adapts to the size of your company.
                         </p>
-                    </div>
+                    </motion.div>
 
                     {/* Billing toggle */}
-                    <div className="flex justify-center mb-14">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
+                        className="flex justify-center mb-14"
+                    >
                         <div className="inline-flex items-center bg-gray-100 rounded-xl p-1 gap-1">
                             <button
                                 onClick={() => setAnnual(true)}
@@ -110,13 +121,31 @@ export default function PricingTables() {
                                 Bill Monthly
                             </button>
                         </div>
-                    </div>
+                    </motion.div>
 
                     {/* Cards grid */}
-                    <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4 items-stretch">
+                    <motion.div
+                        initial="hidden"
+                        animate="visible"
+                        variants={{
+                            hidden: { opacity: 0 },
+                            visible: {
+                                opacity: 1,
+                                transition: {
+                                    staggerChildren: 0.15,
+                                    delayChildren: 0.3
+                                }
+                            }
+                        }}
+                        className="grid gap-6 md:grid-cols-2 xl:grid-cols-4 items-stretch"
+                    >
                         {plans.map((plan) => (
-                            <div
+                            <motion.div
                                 key={plan.name}
+                                variants={{
+                                    hidden: { opacity: 0, y: 30 },
+                                    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+                                }}
                                 className={`relative flex flex-col rounded-2xl p-7 transition-shadow duration-200 ${plan.popular
                                     ? "bg-blue-100 border-2 border-[#0066FF] shadow-xl shadow-blue-200"
                                     : "bg-white border border-gray-200 shadow-sm hover:shadow-md"
@@ -185,9 +214,9 @@ export default function PricingTables() {
                                 >
                                     <a href={plan.href}>{plan.cta}</a>
                                 </Button>
-                            </div>
+                            </motion.div>
                         ))}
-                    </div>
+                    </motion.div>
                 </div>
             </div>
         </section>
