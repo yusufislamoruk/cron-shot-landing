@@ -185,13 +185,8 @@ export default function PricingTables() {
                                             <span className="text-sm ml-1 text-gray-400">/mo</span>
                                         </div>
                                     )}
-                                    {!plan.enterprise && annual && plan.annualPrice !== 0 && (
-                                        <p className="text-xs mt-1 text-gray-400">
-                                            Billed annually
-                                        </p>
-                                    )}
                                 </div>
-
+                                
                                 {/* Features */}
                                 <ul className="space-y-3 mb-8 grow">
                                     {plan.features.map((f) => (
