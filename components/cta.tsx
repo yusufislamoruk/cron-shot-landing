@@ -26,7 +26,7 @@ export default function Cta() {
 
               <div>
                 <Link
-                  className="px-6 py-4 rounded-md font-semibold text-blue-600 bg-gradient-to-r from-blue-100 to-white hover:opacity-90 hover:scale-105 transition-transform duration-200" href="/sign-up"
+                  className="px-6 py-4 rounded-md font-semibold text-blue-600 bg-gradient-to-r from-blue-100 to-white hover:opacity-90 hover:scale-105 transition-transform duration-200" href="/dashboard"
                 >
                   Get Started for Free
                 </Link>

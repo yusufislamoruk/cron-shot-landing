@@ -46,7 +46,7 @@ export default function HeroHome() {
             </p>
             <div className="mt-4">
               <button className="h-14 px-8 rounded-lg bg-[#0066FF] hover:bg-blue-700 text-white text-base font-semibold shadow-lg transition-transform hover:scale-105 cursor-pointer">
-                <Link href="/sign-up">
+                <Link href="/dashboard">
                   Get Started for Free
                 </Link>
               </button>

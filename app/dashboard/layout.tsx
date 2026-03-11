@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { UserButton } from '@clerk/nextjs';
-import Logo from '@/components/ui/logo';
-import { LayoutDashboard, Link as LinkIcon, BarChart, CreditCard, ChevronRight } from 'lucide-react';
+import Logo from '@/components/ui/logo-02';
+import { Link as LinkIcon, ChevronRight } from 'lucide-react';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
     return (
@@ -15,15 +15,6 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                     <div className="text-xs font-semibold text-gray-500 mb-4 px-2 tracking-wider mt-2">MENU</div>
                     <Link href="/dashboard" className="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-[#242A38] text-white font-medium">
                         <LinkIcon size={18} /> Webpages
-                    </Link>
-                    <Link href="/dashboard/comparisons" className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 hover:text-white hover:bg-[#242A38] transition-colors">
-                        <LayoutDashboard size={18} /> Comparisons
-                    </Link>
-                    <Link href="/dashboard/analytics" className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 hover:text-white hover:bg-[#242A38] transition-colors">
-                        <BarChart size={18} /> Analytics
-                    </Link>
-                    <Link href="/dashboard/billing" className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 hover:text-white hover:bg-[#242A38] transition-colors">
-                        <CreditCard size={18} /> Billing
                     </Link>
                 </nav>
             </aside>
