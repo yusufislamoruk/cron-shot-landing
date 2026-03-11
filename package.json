@@ -10,6 +10,7 @@
     "test": "echo \"No tests configured yet\" && exit 0"
   },
   "dependencies": {
+    "@clerk/nextjs": "^7.0.4",
     "@sendgrid/mail": "^8.1.6",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

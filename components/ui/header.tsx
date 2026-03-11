@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { Show, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
 import Logo from "./logo";
 import { Button } from "./button";
 import MobileMenu from "./mobilemenu";
@@ -26,7 +27,7 @@ export default function Header() {
     }, [top]);
 
     return (
-        <header className={`fixed top-0 w-full z-50 flex items-center justify-between px-4 sm:px-12 lg:px-24 xl:px-40 py-4 transition-all duration-100 ${!top ? "bg-white/80 backdrop-blur-md border-b border-gray-200/50 shadow-sm" : "bg-transparent border-b-0"}`}>
+        <header className={`fixed top-0 w-full z-50 flex items-center justify-between px-4 sm:px-12 lg:px-24 xl:px-40 py-4 transition-all duration-100 ${top ? "bg-transparent border-b-0" : "bg-white/80 backdrop-blur-md border-b border-gray-200/50 shadow-sm"}`}>
             <div className="flex-shrink-0">
                 <Logo />
             </div>
@@ -85,15 +86,22 @@ export default function Header() {
                 </NavigationMenu>
             </div>
 
-            <div className="hidden md:flex items-center gap-6 text-gray-600 font-normal hover:text-gray-900 bg-transparent cursor-pointer text-xl pr-4">
-                <Link href="/login">
-                    Sign in
-                </Link>
-                <Button className="bg-[#1C1C1E] text-white text-xl hover:bg-[#2C2C2E] rounded-md px-6 shadow-sm cursor-pointer text-base pb-3">
-                    <Link href="/sign-up">
-                        Sign up &rarr;
-                    </Link>
-                </Button>
+            <div className="hidden md:flex items-center gap-6 text-gray-600 font-normal hover:text-gray-900 bg-transparent text-xl pr-4">
+                <Show when="signed-out">
+                    <SignInButton mode="modal" forceRedirectUrl="/dashboard">
+                        <button className="cursor-pointer hover:text-gray-900 transition-colors">
+                            Sign in
+                        </button>
+                    </SignInButton>
+                    <SignUpButton mode="modal" forceRedirectUrl="/dashboard">
+                        <Button className="bg-[#1C1C1E] text-white hover:bg-[#2C2C2E] rounded-md px-6 shadow-sm cursor-pointer text-base pb-3">
+                            Sign up &rarr;
+                        </Button>
+                    </SignUpButton>
+                </Show>
+                <Show when="signed-in">
+                    <UserButton />
+                </Show>
             </div>
             <MobileMenu />
         </header>
