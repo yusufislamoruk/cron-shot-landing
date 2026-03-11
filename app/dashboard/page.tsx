@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { Camera, Save } from "lucide-react";
+import { Camera, Save, AlertCircle, Loader2 } from "lucide-react";
+import { useAuth } from "@clerk/nextjs";
 
 export default function ConfigurationPage() {
+    const { getToken } = useAuth();
     const [url, setUrl] = useState("");
     const [frequency, setFrequency] = useState("Daily");
     const [width, setWidth] = useState(1280);
@@ -11,6 +13,77 @@ export default function ConfigurationPage() {
     const [userAgent, setUserAgent] = useState("");
     const [authHeader, setAuthHeader] = useState("");
     const [cookies, setCookies] = useState("");
+
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+    const [outputUrl, setOutputUrl] = useState<string | null>(null);
+
+    const handleTest = async () => {
+        if (!url) {
+            setError("Webpage URL is required.");
+            return;
+        }
+
+        try {
+            setLoading(true);
+            setError(null);
+            setOutputUrl(null);
+
+            const token = await getToken();
+
+            const response = await fetch("http://localhost:3001/screenshot", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    url,
+                    width,
+                    height,
+                    fullPage: false
+                })
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || "Failed to capture screenshot.");
+            }
+
+            const blob = await response.blob();
+            const objectUrl = URL.createObjectURL(blob);
+            setOutputUrl(objectUrl);
+        } catch (err: any) {
+            console.error("Screenshot error:", err);
+            setError(err.message || "An unexpected error occurred.");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    let outputContent;
+    if (error) {
+        outputContent = (
+            <div className="flex flex-col items-center text-red-400 gap-3 max-w-sm text-center">
+                <AlertCircle size={32} />
+                <p className="text-sm">{error}</p>
+            </div>
+        );
+    } else if (outputUrl) {
+        outputContent = (
+            <img 
+                src={outputUrl} 
+                alt="Screenshot output" 
+                className="rounded shadow-lg w-full max-h-full object-contain" 
+            />
+        );
+    } else {
+        outputContent = (
+            <div className="w-32 h-32 text-gray-700 opacity-30">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+            </div>
+        );
+    }
 
     return (
         <div className="p-8 max-w-[1400px] mx-auto flex flex-col lg:flex-row gap-8">
@@ -111,8 +184,13 @@ export default function ConfigurationPage() {
             <div className="flex-1 min-w-[500px] flex flex-col gap-4">
                 {/* Actions */}
                 <div className="flex justify-end gap-3">
-                    <button className="flex items-center gap-2 px-4 py-2 bg-white text-black text-sm font-semibold rounded-lg hover:bg-gray-100 transition-colors shadow-sm cursor-pointer">
-                        <Camera size={16} /> Test
+                    <button 
+                        onClick={handleTest}
+                        disabled={loading}
+                        className="flex items-center gap-2 px-4 py-2 bg-white text-black text-sm font-semibold rounded-lg hover:bg-gray-100 transition-colors shadow-sm cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                        {loading ? <Loader2 size={16} className="animate-spin" /> : <Camera size={16} />} 
+                        {loading ? "Capturing..." : "Test"}
                     </button>
                     <button className="flex items-center gap-2 px-4 py-2 bg-[#2D3342] text-white text-sm font-semibold rounded-lg hover:bg-[#3B4254] transition-colors border border-gray-600 shadow-sm cursor-pointer">
                         <Save size={16} /> Save
@@ -120,16 +198,13 @@ export default function ConfigurationPage() {
                 </div>
 
                 {/* Output Display */}
-                <div className="relative flex-1 min-h-[500px] bg-[#1a202c]/50 rounded-2xl border border-[#1F2937] flex items-center justify-center overflow-hidden shadow-inner">
+                <div className="relative flex-1 min-h-[500px] bg-[#1a202c]/50 rounded-2xl border border-[#1F2937] flex flex-col items-center justify-center overflow-hidden shadow-inner p-4">
                     {/* Output Badge */}
-                    <div className="absolute top-4 right-4 bg-[#0E121A]/80 backdrop-blur-md border border-[#1F2937] text-gray-400 text-xs font-semibold px-3 py-1.5 rounded-full shadow-sm">
+                    <div className="absolute top-4 right-4 bg-[#0E121A]/80 backdrop-blur-md border border-[#1F2937] text-gray-400 text-xs font-semibold px-3 py-1.5 rounded-full shadow-sm z-10">
                         Output
                     </div>
 
-                    {/* Placeholder Icon */}
-                    <div className="w-32 h-32 text-gray-700 opacity-30">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
-                    </div>
+                    {outputContent}
                 </div>
             </div>
         </div>
