@@ -1,13 +1,18 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 import { ScreenshotRecord } from "@/utils/groupScreenshots";
+import { useAuth } from "@clerk/nextjs";
 
 export function useScreenshots() {
+    const { userId, isLoaded} = useAuth();
     const [screenshots, setScreenshots] = useState<ScreenshotRecord[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
+
+        if (!isLoaded || !userId) return;
+
         async function fetchScreenshots() {
             try {
                 setLoading(true);
@@ -16,6 +21,7 @@ export function useScreenshots() {
                 await supabase
                 .from("screenshots")
                 .select("*")
+                .eq("user_id", userId)
                 .order("taken_at",{ascending: false});
 
                 if (sbError) throw sbError;
@@ -29,7 +35,7 @@ export function useScreenshots() {
             }
         }
         fetchScreenshots();
-    },[]);
+    },[userId, isLoaded]);
 
     return {screenshots, loading, error};
 }

@@ -196,13 +196,10 @@ export default function ConfigurationPage() {
                     <button
                         onClick={handleTest}
                         disabled={loading}
-                        className="flex items-center gap-2 px-4 py-2 bg-white text-black text-sm font-semibold rounded-lg hover:bg-gray-100 transition-colors shadow-sm cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="flex items-center gap-2 px-4 py-2 bg-white text-black text-sm font-semibold rounded-lg hover:bg-gray-200 transition-colors shadow-sm cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         {loading ? <Loader2 size={16} className="animate-spin" /> : <Camera size={16} />}
-                        {loading ? "Capturing..." : "Test"}
-                    </button>
-                    <button className="flex items-center gap-2 px-4 py-2 bg-[#2D3342] text-white text-sm font-semibold rounded-lg hover:bg-[#3B4254] transition-colors border border-gray-600 shadow-sm cursor-pointer">
-                        <Save size={16} /> Save
+                        {loading ? "Capturing..." : "Capture"}
                     </button>
                 </div>
 
