@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { UserButton } from '@clerk/nextjs';
 import Logo from '@/components/ui/logo-02';
-import { Link as LinkIcon, ChevronRight } from 'lucide-react';
+import { Link as LinkIcon, ChevronRight, Camera } from 'lucide-react';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
     return (
@@ -13,8 +13,11 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 </div>
                 <nav className="flex-1 p-4 space-y-1">
                     <div className="text-xs font-semibold text-gray-500 mb-4 px-2 tracking-wider mt-2">MENU</div>
-                    <Link href="/dashboard" className="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-[#242A38] text-white font-medium">
+                    <Link href="/dashboard" className="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-[#242A38] text-white font-medium hover:bg-gray-900 mb-3">
                         <LinkIcon size={18} /> Webpages
+                    </Link>
+                    <Link href="/dashboard/gallery" className="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-[#242A38] text-white font-medium hover:bg-gray-900">
+                        <Camera size={18} /> Gallery
                     </Link>
                 </nav>
             </aside>

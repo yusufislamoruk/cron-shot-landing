@@ -94,7 +94,7 @@ export default function WebsiteCompliance() {
                     {/* CTA */}
                     <div className="mt-12 flex justify-center">
                         <Button asChild size="lg" className="bg-[#0066FF] hover:bg-blue-700 text-white px-8 rounded-lg shadow-md">
-                            <Link href="/sign-up">Get Started for Free →</Link>
+                            <Link href="/dashboard">Get Started for Free →</Link>
                         </Button>
                     </div>
                 </div>
