@@ -53,7 +53,7 @@ export function ScreenshotModal({ screenshot, onClose }: ScreenshotModalProps) {
                         </div>
                         <div className="flex items-center gap-2 text-gray-200 text-sm font-semibold">
                             <Calendar size={14} className="text-blue-400" />
-                            {new Date(screenshot.taken_at).toLocaleString('tr-TR')}
+                            {new Date(screenshot.taken_at).toLocaleString('en-US')}
                         </div>
                     </div>
                     <div className="flex items-center gap-2">
