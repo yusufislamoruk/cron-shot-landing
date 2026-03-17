@@ -59,14 +59,14 @@ export function ScreenshotModal({ screenshot, onClose }: ScreenshotModalProps) {
                     <div className="flex items-center gap-2">
                         <button
                             onClick={handleDownload}
-                            className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold rounded-xl transition-all shadow-lg shadow-blue-600/20 active:scale-95"
+                            className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold rounded-xl transition-all shadow-lg shadow-blue-600/20 active:scale-95 cursor-pointer"
                         >
                             <Download size={16} />
                             <span className="hidden sm:inline">Download</span>
                         </button>
                         <button
                             onClick={onClose}
-                            className="p-2 text-gray-400 hover:text-white hover:bg-[#1F2937] rounded-xl transition-colors"
+                            className="p-2 text-gray-400 hover:text-white hover:bg-[#1F2937] rounded-xl transition-colors cursor-pointer"
                         >
                             <X size={24} />
                         </button>
