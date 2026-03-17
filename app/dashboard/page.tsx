@@ -44,7 +44,7 @@ export default function ConfigurationPage() {
                     fullPage: false
                 })
             });
-            
+
             const result = await response.json();
 
             if (!response.ok) {
@@ -52,16 +52,16 @@ export default function ConfigurationPage() {
             }
 
             const s3Url = result.screenshot?.s3_url || result.data?.s3_url;
-            
+
             console.log(s3Url);
-            
-            if(s3Url){
+
+            if (s3Url) {
                 setOutputUrl(s3Url);
             }
-            else{
+            else {
                 setError("Failed to capture screenshot.");
             }
-            
+
         } catch (err: any) {
             console.error("Screenshot error:", err);
             setError(err.message || "An unexpected error occurred.");
