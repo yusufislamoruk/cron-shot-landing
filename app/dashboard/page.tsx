@@ -30,7 +30,7 @@ export default function ConfigurationPage() {
 
             const token = await getToken();
 
-            const response = await fetch("http://localhost:3001/screenshot", {
+            const response = await fetch(process.env.NEXT_PUBLIC_API_URL + "/screenshot", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
