@@ -11,9 +11,8 @@ export default function ConfigurationPage() {
     const [width, setWidth] = useState(1280);
     const [height, setHeight] = useState(1024);
     const [userAgent, setUserAgent] = useState("");
-    const [authHeader, setAuthHeader] = useState("");
+    const [authorizationHeader, setAuthorizationHeader] = useState("");
     const [cookies, setCookies] = useState("");
-
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [outputUrl, setOutputUrl] = useState<string | null>(null);
@@ -41,7 +40,10 @@ export default function ConfigurationPage() {
                     url,
                     width,
                     height,
-                    fullPage: false
+                    fullPage: false,
+                    userAgent,
+                    authorizationHeader,
+                    cookies
                 })
             });
 
@@ -170,8 +172,8 @@ export default function ConfigurationPage() {
                             <label className="block text-xs font-semibold text-gray-400 mb-1.5 ml-0.5">Authorization Header</label>
                             <input
                                 type="text"
-                                value={authHeader}
-                                onChange={(e) => setAuthHeader(e.target.value)}
+                                value={authorizationHeader}
+                                onChange={(e) => setAuthorizationHeader(e.target.value)}
                                 className="w-full bg-[#0E121A] border border-[#1F2937] rounded-lg px-4 py-2.5 text-gray-400 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
                             />
                         </div>
