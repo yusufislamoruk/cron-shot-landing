@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Camera, Save, AlertCircle, Loader2 } from "lucide-react";
+import { Camera, AlertCircle, Loader2 } from "lucide-react";
 import { useAuth } from "@clerk/nextjs";
+
 
 export default function ConfigurationPage() {
     const { getToken } = useAuth();
@@ -10,6 +11,7 @@ export default function ConfigurationPage() {
     const [frequency, setFrequency] = useState("Daily");
     const [width, setWidth] = useState(1280);
     const [height, setHeight] = useState(1024);
+    const [fullPage, setFullPage] = useState(false);
     const [userAgent, setUserAgent] = useState("");
     const [authorizationHeader, setAuthorizationHeader] = useState("");
     const [cookies, setCookies] = useState("");
@@ -40,7 +42,7 @@ export default function ConfigurationPage() {
                     url,
                     width,
                     height,
-                    fullPage: false,
+                    fullPage,
                     userAgent,
                     authorizationHeader,
                     cookies
@@ -129,6 +131,15 @@ export default function ConfigurationPage() {
                                 <option>Weekly</option>
                                 <option>Monthly</option>
                             </select>
+                        </div>
+                        <div className="flex items-center gap-3">
+                            <label className="block text-xs font-semibold text-gray-400 mb-1.5 ml-0.5">Full Page</label>
+                            <input
+                                type="checkbox"
+                                checked={fullPage}
+                                onChange={(e) => setFullPage(e.target.checked)}
+                                className="w-10 h-5 bg-[#1F2937] rounded-full appearance-none cursor-pointer checked:bg-blue-500 relative transition-colors after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:w-4 after:h-4 after:rounded-full after:transition-all checked:after:translate-x-5"
+                            />
                         </div>
                     </div>
                 </div>
