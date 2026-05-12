@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Camera, AlertCircle, Loader2, CheckCircle, Calendar } from "lucide-react";
+import { Camera, AlertCircle, Loader2, CheckCircle} from "lucide-react";
 import { useAuth } from "@clerk/nextjs";
 
 export default function ConfigurationPage() {
@@ -220,8 +220,8 @@ const handleSchedule = async () => {
                         disabled={loading}
                         className="flex items-center gap-2 px-4 py-2 bg-white text-black text-sm font-semibold rounded-lg hover:bg-gray-200 transition-colors shadow-sm cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                        {loading ? <Loader2 size={16} className="animate-spin" /> : <Calendar size={16} />}
-                        {loading ? "Scheduling..." : "Schedule"}
+                        {loading ? <Loader2 size={16} className="animate-spin" /> : <Camera size={16} />}
+                        {loading ? "Capturing..." : "Capture"}
                     </button>
                 </div>
 
