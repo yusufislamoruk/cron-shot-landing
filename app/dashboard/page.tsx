@@ -9,6 +9,7 @@ export default function ConfigurationPage() {
     const { getToken } = useAuth();
     const [url, setUrl] = useState("");
     const [frequency, setFrequency] = useState("Daily");
+    const [time, setTime] = useState("08:00");
     const [width, setWidth] = useState(1280);
     const [height, setHeight] = useState(1024);
     const [fullPage, setFullPage] = useState(false);
@@ -43,6 +44,7 @@ export default function ConfigurationPage() {
                     width,
                     height,
                     fullPage,
+                    time,
                     userAgent,
                     authorizationHeader,
                     cookies
@@ -121,16 +123,27 @@ export default function ConfigurationPage() {
                         </div>
 
                         <div>
-                            <label className="block text-xs font-semibold text-gray-400 mb-1.5 ml-0.5">Frequency</label>
-                            <select
-                                value={frequency}
-                                onChange={(e) => setFrequency(e.target.value)}
-                                className="w-full bg-[#0E121A] border border-[#1F2937] rounded-lg px-4 py-2.5 text-gray-200 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors appearance-none"
-                            >
-                                <option>Daily</option>
-                                <option>Weekly</option>
-                                <option>Monthly</option>
-                            </select>
+                            <label className="block text-xs font-semibold text-gray-400 mb-1.5 ml-0.5">Frequency & Time</label>
+                            <div className="flex gap-2">
+                                <select
+                                    value={frequency}
+                                    onChange={(e) => setFrequency(e.target.value)}
+                                    className="flex-1 bg-[#0E121A] border border-[#1F2937] rounded-lg px-4 py-2.5 text-gray-200 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors appearance-none"
+                                >
+                                    <option>Daily</option>
+                                    <option>Weekly</option>
+                                    <option>Monthly</option>
+                                </select>
+                                <select
+                                    value={time}
+                                    onChange={(e) => setTime(e.target.value)}
+                                    className="w-28 sm:w-32 bg-[#0E121A] border border-[#1F2937] rounded-lg px-4 py-2.5 text-gray-200 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors appearance-none"
+                                >
+                                    <option value="08:00">08:00</option>
+                                    <option value="13:00">13:00</option>
+                                    <option value="20:00">20:00</option>
+                                </select>
+                            </div>
                         </div>
                         <div className="flex items-center gap-3">
                             <label className="block text-xs font-semibold text-gray-400 mb-1.5 ml-0.5">Full Page</label>
