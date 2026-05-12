@@ -1,9 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Camera, AlertCircle, Loader2 } from "lucide-react";
+import { Camera, AlertCircle, Loader2, CheckCircle, Calendar } from "lucide-react";
 import { useAuth } from "@clerk/nextjs";
-
 
 export default function ConfigurationPage() {
     const { getToken } = useAuth();
@@ -17,64 +16,59 @@ export default function ConfigurationPage() {
     const [authorizationHeader, setAuthorizationHeader] = useState("");
     const [cookies, setCookies] = useState("");
     const [loading, setLoading] = useState(false);
+    const [successMessage, setSuccessMessage] = useState<string | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [outputUrl, setOutputUrl] = useState<string | null>(null);
 
-    const handleTest = async () => {
-        if (!url) {
-            setError("Webpage URL is required.");
-            return;
+const handleSchedule = async () => {
+    if (!url) {
+        setError("Webpage URL is required.");
+        return;
+    }
+
+    try {
+        setLoading(true);
+        setError(null);
+        setOutputUrl(null);
+        setSuccessMessage(null);
+
+        const token = await getToken();
+
+        const response = await fetch(process.env.NEXT_PUBLIC_API_URL + "/scheduled-jobs", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                target_url: url,
+                width,
+                height,
+                full_page: fullPage,
+                frequency: frequency.toLowerCase(),
+                time_of_day: time,
+                user_agent: userAgent || null,
+                authorization_header: authorizationHeader || null,
+                cookies: cookies || null
+            })
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            throw new Error(result.error || "Failed to schedule screenshot.");
         }
 
-        try {
-            setLoading(true);
-            setError(null);
-            setOutputUrl(null);
+        setSuccessMessage("Screenshot scheduled successfully! Check the gallery later.");
 
-            const token = await getToken();
+    } catch (err: any) {
+        console.error("Schedule error:", err);
+        setError(err.message || "An unexpected error occurred.");
+    } finally {
+        setLoading(false);
+    }
+};
 
-            const response = await fetch(process.env.NEXT_PUBLIC_API_URL + "/screenshot", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
-                },
-                body: JSON.stringify({
-                    url,
-                    width,
-                    height,
-                    fullPage,
-                    time,
-                    userAgent,
-                    authorizationHeader,
-                    cookies
-                })
-            });
-
-            const result = await response.json();
-
-            if (!response.ok) {
-                throw new Error(result.error || "Failed to capture screenshot.");
-            }
-
-            const s3Url = result.screenshot?.s3_url || result.data?.s3_url;
-
-            console.log(s3Url);
-
-            if (s3Url) {
-                setOutputUrl(s3Url);
-            }
-            else {
-                setError("Failed to capture screenshot.");
-            }
-
-        } catch (err: any) {
-            console.error("Screenshot error:", err);
-            setError(err.message || "An unexpected error occurred.");
-        } finally {
-            setLoading(false);
-        }
-    };
 
     let outputContent;
     if (error) {
@@ -92,13 +86,15 @@ export default function ConfigurationPage() {
                 className="rounded shadow-lg w-full max-h-full object-contain"
             />
         );
-    } else {
-        outputContent = (
-            <div className="w-32 h-32 text-gray-700 opacity-30">
-                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" /><circle cx="12" cy="13" r="3" /></svg>
-            </div>
-        );
-    }
+    } else if (successMessage) {
+    outputContent = (
+        <div className="flex flex-col items-center text-green-400 gap-3 max-w-sm text-center">
+            <CheckCircle size={32} />
+            <p className="text-sm">{successMessage}</p>
+        </div>
+    );
+}
+
 
     return (
         <div className="p-8 max-w-[1400px] mx-auto flex flex-col lg:flex-row gap-8">
@@ -220,12 +216,12 @@ export default function ConfigurationPage() {
                 {/* Actions */}
                 <div className="flex justify-end gap-3">
                     <button
-                        onClick={handleTest}
+                        onClick={handleSchedule}
                         disabled={loading}
                         className="flex items-center gap-2 px-4 py-2 bg-white text-black text-sm font-semibold rounded-lg hover:bg-gray-200 transition-colors shadow-sm cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                        {loading ? <Loader2 size={16} className="animate-spin" /> : <Camera size={16} />}
-                        {loading ? "Capturing..." : "Capture"}
+                        {loading ? <Loader2 size={16} className="animate-spin" /> : <Calendar size={16} />}
+                        {loading ? "Scheduling..." : "Schedule"}
                     </button>
                 </div>
 
