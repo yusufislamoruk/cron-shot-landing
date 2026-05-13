@@ -9,6 +9,7 @@ export default function ConfigurationPage() {
     const [url, setUrl] = useState("");
     const [frequency, setFrequency] = useState("Daily");
     const [time, setTime] = useState("08:00");
+    const [timezone, setTimezone] = useState(3);
     const [width, setWidth] = useState(1280);
     const [height, setHeight] = useState(1024);
     const [fullPage, setFullPage] = useState(false);
@@ -47,10 +48,11 @@ const handleSchedule = async () => {
                 full_page: fullPage,
                 frequency: frequency.toLowerCase(),
                 time_of_day: time,
+                timezone_offset: timezone,
                 user_agent: userAgent || null,
                 authorization_header: authorizationHeader || null,
                 cookies: cookies || null
-            })
+})
         });
 
         const result = await response.json();
@@ -138,9 +140,27 @@ const handleSchedule = async () => {
                                     <option value="08:00">08:00</option>
                                     <option value="13:00">13:00</option>
                                     <option value="20:00">20:00</option>
-                                </select>
+                                </select>                              
                             </div>
                         </div>
+                        <div>
+                            <label className="block text-xs font-semibold text-gray-400 mb-1.5 ml-0.5">Timezone</label>
+                            <select
+                                value={timezone}
+                                onChange={(e) => setTimezone(Number(e.target.value))}
+                                className="w-full bg-[#0E121A] border border-[#1F2937] rounded-lg px-4 py-2.5 text-gray-200 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors appearance-none"
+                            >
+                                <option value={3}>UTC+3 (Istanbul / Turkey)</option>
+                                <option value={2}>UTC+2 (Frankfurt / Europe)</option>
+                                <option value={1}>UTC+1</option>
+                                <option value={0}>UTC+0 (London / Dublin)</option>
+                                <option value={-1}>UTC-1 (Azores)</option>
+                                <option value={-3}>UTC-3 (Brasilia)</option>
+                                <option value={-5}>UTC-5 (New York / USA East)</option>
+                                <option value={-6}>UTC-6 (Chicago / USA Central)</option>
+                                <option value={-8}>UTC-8 (Los Angeles / USA West)</option>
+                            </select>
+                        </div>                       
                         <div className="flex items-center gap-3">
                             <label className="block text-xs font-semibold text-gray-400 mb-1.5 ml-0.5">Full Page</label>
                             <input
