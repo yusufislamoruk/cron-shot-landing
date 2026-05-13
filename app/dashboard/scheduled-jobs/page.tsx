@@ -42,7 +42,7 @@ export default function ScheduledJobsPage() {
                             </div>
                             <button
                                 onClick={() => cancelJob(job.id)}
-                                className="text-red-400 hover:text-red-300 text-sm shrink-0"
+                                className="text-red-400 hover:text-red-300 text-sm shrink-0 hover:cursor-pointer"
                             >
                                 Cancel
                             </button>

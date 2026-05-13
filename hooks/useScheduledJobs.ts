@@ -8,9 +8,7 @@ export function useScheduledJobs() {
     const [error, setError] = useState<string | null>(null);
 
     const fetchJobs = async () => {
-        console.log('fetchJobs called', { isLoaded, userId });
         if (!isLoaded || !userId) {
-            console.log('early return - not ready');
             setLoading(false);  // EKLE
             return;
         }
